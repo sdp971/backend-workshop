@@ -52,6 +52,7 @@ const login = (req, res) => {
         message: 'Authenticated successfully !',
         token: generateToken({ userId:userId, username :username, role:role})
       })
+      
   })
     .catch(err => {
   return res.status(500).json({ message: 'Something went wrong :-(' });
@@ -89,9 +90,9 @@ const createUser = (req, res) => {
 
 const userInfo = (req, res) => { 
 
-  if (req.user.role === 3) {
-    console.log("c'est un administratif");
-  }
+  // if (req.user.role === 3) {
+  //   console.log("c'est un administratif");
+  // }
 
   
   userDAO.selectById(req.user.userId).then((user) => {
@@ -110,9 +111,26 @@ const getuserRole = (req, res) => {
     res.status(404).json({message :`Role for the user ${id} has been not found !`})
   })
 }
+// const deleteUser = (req, res) => {
+ 
+//   if (req.user.role === 3 || parseInt(req.params.id) === req.user.id) {
+//     userDAO
+//       .deleteById(req.params.id)
+//       .then(() => {
+//         res.status(200).json({
+//           message: `User n° ${req.params.id} has been deleted successfully`,
+//         });
+//       })
+//       .catch((err) => {
+//         res.status(404).json(err);
+//       })
+//   } else {
+//     res.status(403).json({ message: 'Forbidden' });
+//   }
+// };
+
 const deleteUser = (req, res) => {
  
-  if (req.user.role === 3 || parseInt(req.params.id) === req.user.id) {
     userDAO
       .deleteById(req.params.id)
       .then(() => {
@@ -122,11 +140,8 @@ const deleteUser = (req, res) => {
       })
       .catch((err) => {
         res.status(404).json(err);
-      })
-  } else {
-    res.status(403).json({ message: 'Forbidden' });
-  }
+      });
+ 
 };
-
 
 export { getUser, createUser,login, userInfo, getuserRole, deleteUser };

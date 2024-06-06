@@ -23,8 +23,9 @@ import {
   getMediaByFilter,
 } from './controller/mediaController.js';
 import generateToken from './model/generateToken.js';
-import verifyToken from './controller/verifyToken.js';
+import verifyToken from './controller/middleware/verifyToken.js';
 import { login, createUser, getUser,userInfo, getuserRole,deleteUser } from './controller/userController.js';
+import { isAdmin } from './controller/middleware/roleAccess.js';
 
 
 
@@ -34,7 +35,7 @@ router.get('/author', getAuthor);
 router.post('/author',verifyToken, insertAuthor);
 router.get('/author/:id', getAuthorById);
 router.put('/author/:id', updateAuthor);
-router.delete('/author/:id', deleteAuthor);
+router.delete('/author/:id',verifyToken, isAdmin, deleteAuthor);
 
 
 // router.post('/login', (req, res) => { 

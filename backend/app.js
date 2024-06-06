@@ -2,6 +2,7 @@ import { AuthorDAO } from './model/AuthorDAO.js';
 import { Database } from './model/Database.js';
 import { createRandomAuthor } from './services/FakerData.js';
 import express from 'express';
+import cors from 'cors';
 import router from './route.js';
 const app = express();
 
@@ -20,9 +21,21 @@ for (let i = 0; i < numberAuthors; i++) {
 // authorDAO.create("Marina BASS");
 
 app.use(express.json());
+
+
+app.use(
+  cors({
+    origin: 'http://localhost:5174',
+    optionsSuccessStatus: 200,
+  })
+);
 app.use('/api', router);
 
-app.listen(3000, () => {
+
+
+
+
+app.listen(5000, () => {
   console.log('Server stared ....');
 });
 
