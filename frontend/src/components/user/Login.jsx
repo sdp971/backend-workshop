@@ -9,7 +9,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const api = useAPI();
   const navigate = useNavigate();
-  const { setIsLoggedIn, setAuthUser } = useAuth();
+  const { setIsLoggedIn, setAuthUser, setToken } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +30,7 @@ function Login() {
         setIsLoggedIn(true);
 
         const token = res.data.token;
+        setToken(token);
         api.defaults.headers.authorization = `Bearer ${token}`;
         const decodedToken = jwtDecode(token);
 
@@ -38,6 +39,8 @@ function Login() {
           username: decodedToken.username,
           role: decodedToken.role,
         });
+
+        
 
         navigate('/media');
       })
