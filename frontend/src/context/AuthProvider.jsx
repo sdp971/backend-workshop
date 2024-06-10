@@ -1,4 +1,4 @@
-import  { useState, useContext, createContext, useEffect, useMemo } from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -6,8 +6,7 @@ function AuthProvider({ children }) {
   const [authUser, setAuthUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [token, setToken] = useState("")
-
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     if (authUser.role === 3) {
@@ -15,8 +14,12 @@ function AuthProvider({ children }) {
     }
   }, [authUser.role]);
 
-
-  sessionStorage.setItem('auth.user', token);
+  const logout = () => {
+    setToken(" ")
+    setIsAdmin(false);
+    setIsLoggedIn(false);
+    sessionStorage.removeItem('token');
+  }
 
 
   const value = {
@@ -27,8 +30,13 @@ function AuthProvider({ children }) {
     isAdmin,
     setIsAdmin,
     token,
-    setToken
+    setToken,
+    logout,
+
+    
   };
+
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

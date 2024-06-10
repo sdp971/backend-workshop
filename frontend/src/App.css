@@ -14,7 +14,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 85%;
   margin: auto;
 
 
@@ -22,7 +22,8 @@ nav{
 
 .navigation_links{
   display: flex;
-  gap: 16px;
+     gap: 32px;
+    align-items: center;
  }
 
  .navigation_links li{
@@ -32,9 +33,10 @@ list-style-type: none;
  }
 
  .btn-login{
-  padding: 8px;
+
   border-radius:5px;
   cursor: pointer;
+  
  }
 
    .navlink{
@@ -88,7 +90,7 @@ input
   font-size: 100%;
   margin: 0;
   box-sizing: border-box;
-  width: 100%;
+  width: fit-content;
   padding: 5px;
   height: 30px;
 }

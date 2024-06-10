@@ -31,6 +31,7 @@ function Login() {
 
         const token = res.data.token;
         setToken(token);
+        sessionStorage.setItem('token', token);
         api.defaults.headers.authorization = `Bearer ${token}`;
         const decodedToken = jwtDecode(token);
 
@@ -42,7 +43,7 @@ function Login() {
 
         
 
-        navigate('/media');
+        navigate('/profile');
       })
       .catch((err) => {
         if (err.response) {
@@ -50,6 +51,8 @@ function Login() {
         }
       });
   };
+
+ 
 
   return (
     <form>
@@ -74,6 +77,7 @@ function Login() {
       <button type='submit' onClick={handleSubmit}>
         Se connecter
       </button>
+    
     </form>
   );
 }

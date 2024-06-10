@@ -1,9 +1,40 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../context/AuthProvider';
+import { useAuth } from '../context/AuthProvider.jsx';
+import { useNavigate } from 'react-router-dom';
+import Button from './Button.jsx';
+
+
+
 
 function Navbar() {
-  const { isLoggedIn } = useAuth;
+  const { isLoggedIn,logout } = useAuth();
+  const navigate = useNavigate();
+
+
+
   
+
+
+  function handleLogout() {
+  
+  logout()
+  navigate('/login');
+   
+  }
+
+   let authButton;
+   if (isLoggedIn) {
+     authButton = <Button onClick={handleLogout}>Se déconnecter</Button>;
+   } else {
+     authButton = (
+       <NavLink to='/login' className='navlink'>
+         <Button>Se connecter</Button>
+       </NavLink>
+     );
+   }
+
+
+
   return (
     <nav>
       <header className='navigation'>
@@ -19,10 +50,8 @@ function Navbar() {
               Liste des médias
             </NavLink>
           </li>
+          <li>{authButton}</li>
         </ul>
-        <NavLink to='/login' className='navlink'>
-          <button className='btn-login'>Se connecter</button>
-        </NavLink>
       </header>
     </nav>
   );

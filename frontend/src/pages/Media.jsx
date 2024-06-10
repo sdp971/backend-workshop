@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthProvider.jsx';
 function Media() {
   const [data, setData] = useState([]);
   const api = useAPI();
-  const { isAdmin } = useAuth();
+  const { isAdmin, isLoggedIn } = useAuth();
 
   const getAllMedia = () => {
     api
