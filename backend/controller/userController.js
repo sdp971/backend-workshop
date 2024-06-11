@@ -43,8 +43,8 @@ const login = (req, res) => {
 
   userDAO.authLogin(username, password)
     .then(({ isAuthenticated, userId,role }) => {
-      console.log(userId, "id");
-      console.log(role,"role");
+      // console.log(userId, "id");
+      // console.log(role,"role");
       if (!isAuthenticated) {
       return res.status(401).json({ message: 'Authentification failed : invalid login !' });
       }

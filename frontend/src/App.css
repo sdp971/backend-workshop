@@ -90,7 +90,14 @@ input
   font-size: 100%;
   margin: 0;
   box-sizing: border-box;
+  width: -moz-fit-content;
   width: fit-content;
+  
   padding: 5px;
   height: 30px;
+}
+
+.error-message{
+  color:red;
+  padding: 16px;
 }

@@ -7,6 +7,8 @@ import { jwtDecode } from 'jwt-decode';
 function Login() {
   const [surname, setSurname] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const api = useAPI();
   const navigate = useNavigate();
   const { setIsLoggedIn, setAuthUser, setToken } = useAuth();
@@ -48,6 +50,20 @@ function Login() {
       .catch((err) => {
         if (err.response) {
           console.error(err.response.data);
+          setError(true);
+          const { status } = err.response;
+          switch (status) {
+            case 401:
+              setErrorMessage("Mot de passe ou identifiant invalide");
+              break;
+            case 404:
+              setErrorMessage("Erreur de réseau. Vérifiez votre connexion internet")
+              break;
+            default:
+              setErrorMessage("Une erreur s'est produite. Veuillez réessayer plus tard")
+              break;
+              
+           }
         }
       });
   };
@@ -73,7 +89,7 @@ function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-
+      {error && <p className='error-message'>{errorMessage}</p>}
       <button type='submit' onClick={handleSubmit}>
         Se connecter
       </button>

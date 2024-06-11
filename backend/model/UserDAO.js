@@ -56,7 +56,10 @@ export class UserDAO {
       this.connection.execute(query, [username], (err, result) => {
         console.log(result, 'result');
         if (err) return reject(err);
-        const hashPassword = result[0].password;
+        if (result.length === 0) {
+ reject(new Error(`Password or surname invalid`));
+        } else  {
+            const hashPassword = result[0].password;
         const userId = result[0].id;
         const userRole = result[0].role;
         bcrypt.compare(password, hashPassword).then((isValid) => {
@@ -66,6 +69,8 @@ export class UserDAO {
             role:userRole
           });
         });
+        }
+      
       });
     });
   }
