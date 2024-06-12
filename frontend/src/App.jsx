@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx';
 import Profile from './components/user/Profile.jsx';
 import { AuthProvider } from './context/AuthProvider.jsx';
 import Navbar from './components/Navbar.jsx';
+import Register from './components/user/Register.jsx';
 
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/media' element={<Media />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </Router>
     </AuthProvider>

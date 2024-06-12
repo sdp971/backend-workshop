@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useAPI from '../../api/useApi.js';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider.jsx';
 import { jwtDecode } from 'jwt-decode';
 
@@ -72,6 +72,7 @@ function Login() {
 
   return (
     <form>
+      <h2 className='form-title'>FORMULAIRE DE CONNEXION</h2>
       <label htmlFor='surname'>Nom utilisateur:</label>
       <input
         type='text'
@@ -93,7 +94,11 @@ function Login() {
       <button type='submit' onClick={handleSubmit}>
         Se connecter
       </button>
-    
+
+      <NavLink to='/register' className='register-link'>
+        {' '}
+        Pas encore de compte ? Inscrivez vous
+      </NavLink>
     </form>
   );
 }
